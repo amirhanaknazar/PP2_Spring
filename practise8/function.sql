@@ -2,10 +2,10 @@ CREATE OR REPLACE FUNCTION search_contacts(p TEXT)
 RETURNS TABLE(name VARCHAR, phone VARCHAR) AS $$
 BEGIN
     RETURN QUERY
-    SELECT name, phone
-    FROM phonebook
-    WHERE name ILIKE '%' || p || '%'
-       OR phone ILIKE '%' || p || '%';
+    SELECT pb.name, pb.phone
+    FROM phonebook pb
+    WHERE pb.name ILIKE '%' || p || '%'
+       OR pb.phone ILIKE '%' || p || '%';
 END;
 $$ LANGUAGE plpgsql;
 
