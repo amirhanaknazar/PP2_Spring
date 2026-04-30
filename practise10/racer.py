@@ -10,15 +10,14 @@ HEIGHT = 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Racer Game")
 
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
 GRAY = (50, 50, 50)
-YELLOW = (255, 255, 0)
+WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLUE = (0, 100, 255)
+YELLOW = (255, 255, 0)
+BLACK = (0, 0, 0)
 
 clock = pygame.time.Clock()
-
 font = pygame.font.SysFont("Arial", 25)
 
 player_width = 50
@@ -29,16 +28,25 @@ player_speed = 6
 
 enemy_width = 50
 enemy_height = 90
+enemy_speed = 5
 enemy_x = random.randint(50, WIDTH - 100)
 enemy_y = -100
-enemy_speed = 5
 
 coin_radius = 12
-coin_x = random.randint(40, WIDTH - 40)
-coin_y = -20
 coin_speed = 4
 
 coins = 0
+
+def generate_coin_x():
+    while True:
+        x = random.randint(40, WIDTH - 40)
+
+        if abs(x - enemy_x) > 100:
+            return x
+
+coin_x = generate_coin_x()
+coin_y = -20
+
 
 running = True
 
@@ -68,7 +76,7 @@ while running:
 
     if coin_y > HEIGHT:
         coin_y = -20
-        coin_x = random.randint(40, WIDTH - 40)
+        coin_x = generate_coin_x()
 
     player_rect = pygame.Rect(player_x, player_y, player_width, player_height)
     enemy_rect = pygame.Rect(enemy_x, enemy_y, enemy_width, enemy_height)
@@ -76,8 +84,8 @@ while running:
                             coin_radius * 2, coin_radius * 2)
 
     if player_rect.colliderect(enemy_rect):
-        game_over = font.render("GAME OVER", True, RED)
-        screen.blit(game_over, (WIDTH // 2 - 70, HEIGHT // 2))
+        text = font.render("GAME OVER", True, RED)
+        screen.blit(text, (WIDTH // 2 - 70, HEIGHT // 2))
         pygame.display.update()
         pygame.time.delay(2000)
         pygame.quit()
@@ -86,18 +94,21 @@ while running:
     if player_rect.colliderect(coin_rect):
         coins += 1
         coin_y = -20
-        coin_x = random.randint(40, WIDTH - 40)
+        coin_x = generate_coin_x()
 
-    pygame.draw.rect(screen, BLUE, (player_x, player_y, player_width, player_height))
+    pygame.draw.rect(screen, BLUE,
+                     (player_x, player_y, player_width, player_height))
 
-    pygame.draw.rect(screen, RED, (enemy_x, enemy_y, enemy_width, enemy_height))
+    pygame.draw.rect(screen, RED,
+                     (enemy_x, enemy_y, enemy_width, enemy_height))
 
     pygame.draw.circle(screen, YELLOW, (coin_x, coin_y), coin_radius)
 
-    coin_text = font.render(f"Coins: {coins}", True, BLACK)
-    screen.blit(coin_text, (WIDTH - 120, 20))
+    text = font.render(f"Coins: {coins}", True, BLACK)
+    screen.blit(text, (260, 20))
 
     pygame.display.update()
     clock.tick(60)
 
 pygame.quit()
+sys.exit()

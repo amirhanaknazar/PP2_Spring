@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Askar",
+        "email": "askar@gmail.com",
+        "birthday": "2004-07-11",
+        "group": "friend",
+        "phone": "87001112233",
+        "type": "mobile"
+    },
+    {
+        "name": "Ali",
+        "email": "ali@gmail.com",
+        "birthday": "2003-05-14",
+        "group": "Friend",
+        "phone": "87001234567",
+        "type": "mobile"
+    },
+    {
+        "name": "Aruzhan",
+        "email": "aruzhan@mail.com",
+        "birthday": "2002-11-22",
+        "group": "Family",
+        "phone": "87005554433",
+        "type": "home"
+    },
+    {
+        "name": "Dias",
+        "email": "dias@work.com",
+        "birthday": "2001-09-10",
+        "group": "Work",
+        "phone": "87007778899",
+        "type": "work"
+    },
+    {
+        "name": "Asis",
+        "email": "asis@gmail.com",
+        "birthday": "2004-07-11",
+        "group": "friend",
+        "phone": "87001145487",
+        "type": "mobile"
+    }
+]
